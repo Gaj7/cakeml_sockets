@@ -96,7 +96,8 @@ void ffilisten(uint8_t * c, long clen, uint8_t * a, long alen) {
     listen(sockfd, qlen);
 
     // return sockfd
-    int_to_byte8(sockfd, a);
+    a[0] = 0;
+    int_to_byte8(sockfd, a+1);
 }
 
 // Argument: sockfd as 64-bit int in a
@@ -121,7 +122,8 @@ void ffiaccept(uint8_t * c, long clen, uint8_t * a, long alen) {
     // fcntl(conn_sockfd, F_SETFL, flags | O_NONBLOCK);
 
     // return conn_sockfd
-    int_to_byte8(conn_sockfd, a);
+    a[0] = 0;
+    int_to_byte8(conn_sockfd, a+1);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -174,5 +176,6 @@ void fficonnect(uint8_t * c, long clen, uint8_t * a, long alen) {
     // fcntl(sockfd, F_SETFL, flags | O_NONBLOCK);
 
     // return sockfd
-    int_to_byte8(sockfd, a);
+    a[0] = 0;
+    int_to_byte8(sockfd, a+1);
 }

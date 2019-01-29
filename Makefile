@@ -1,5 +1,5 @@
-CLIENT_LIST = ../ByteString.sml SocketFFI.sml ClientTest.sml
-SERVER_LIST = ../ByteString.sml SocketFFI.sml ServerTest.sml
+CLIENT_LIST = SocketFFI.sml ClientTest.sml
+SERVER_LIST = SocketFFI.sml ServerTest.sml
 
 # Change this directory if necessary  -- or
 # provide the directory for your machine on the make command-line, e.g.
