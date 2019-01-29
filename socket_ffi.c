@@ -46,7 +46,7 @@ void ffilisten(uint8_t * c, long clen, uint8_t * a, long alen) {
     // Passive flag + null node in getaddrinfo invocation indicates suitability
     // for accepting connections
     hints.ai_flags = AI_PASSIVE;
-    struct addrinfo * result;
+    struct addrinfo * result = 0;
     int gai_ret = getaddrinfo(0, port, &hints, &result);
     if (gai_ret) {
         freeaddrinfo(result);
@@ -54,7 +54,7 @@ void ffilisten(uint8_t * c, long clen, uint8_t * a, long alen) {
         return;
     }
 
-    int sockfd;
+    int sockfd = -1;
     struct addrinfo * r;
     for (r = result; r; r = r->ai_next) {
         sockfd = socket(r->ai_family, r->ai_socktype, r->ai_protocol);
@@ -131,7 +131,7 @@ void fficonnect(uint8_t * c, long clen, uint8_t * a, long alen) {
     // SOCK_STREAM specifies "sequenced, reliable, two-way, connection-based
     // byte streams."
     hints.ai_socktype = SOCK_STREAM;
-    struct addrinfo * result;
+    struct addrinfo * result = 0;
     int gai_ret = getaddrinfo(host, port, &hints, &result);
     if (gai_ret) {
         freeaddrinfo(result);
@@ -139,7 +139,7 @@ void fficonnect(uint8_t * c, long clen, uint8_t * a, long alen) {
         return;
     }
 
-    int sockfd;
+    int sockfd = -1;
     struct addrinfo * r;
     for (r = result; r; r = r->ai_next) {
         sockfd = socket(r->ai_family, r->ai_socktype, r->ai_protocol);
