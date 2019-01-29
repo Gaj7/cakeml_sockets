@@ -34,7 +34,7 @@ void ffilisten(uint8_t * c, long clen, uint8_t * a, long alen) {
 
     // Parse arguments
     int qlen = byte2_to_int(c);
-    char * port = c+2;
+    char * port = (char *)c + 2;
 
     struct addrinfo hints;
     memset(&hints, 0, sizeof(struct addrinfo));
@@ -94,7 +94,7 @@ void ffiaccept(uint8_t * c, long clen, uint8_t * a, long alen) {
     int sockfd = byte8_to_int(c);
 
     struct sockaddr_in conn_addr;
-    int conn_addr_len = sizeof(struct sockaddr_in);
+    unsigned int conn_addr_len = sizeof(struct sockaddr_in);
     // accept returns the sockfd corresponding to the first connection in the
     // incoming queue. If there is none, blocks until there is.
     int conn_sockfd = accept(sockfd, (struct sockaddr *)(&conn_addr), &conn_addr_len);
@@ -121,8 +121,8 @@ void fficonnect(uint8_t * c, long clen, uint8_t * a, long alen) {
     // assert(alen >= 8);
 
     // Parse arguments
-    char * host = c;
-    char * port = c + strlen(c) + 1;
+    char * host = (char *)c;
+    char * port = host + strlen(host) + 1;
 
     struct addrinfo hints;
     memset(&hints, 0, sizeof(struct addrinfo));
